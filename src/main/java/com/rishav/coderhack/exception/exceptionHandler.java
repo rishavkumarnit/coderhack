@@ -19,4 +19,9 @@ public class exceptionHandler {
         return new ResponseEntity<String>("Score between 0 and 100 is allowed", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(userAlreadyexists.class)
+    public ResponseEntity<String> handleuserexists(userAlreadyexists userexistsexception){
+        return new ResponseEntity<String>("User already exists", HttpStatus.CONFLICT);
+    }
+
 }

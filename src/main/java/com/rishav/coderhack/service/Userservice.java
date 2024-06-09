@@ -16,6 +16,10 @@ public class Userservice {
     private Userrepo repository;
 
     public User addUser(User user) {
+        Optional<User> user1 = repository.findById(user.getUserId());
+        if (!user1.isEmpty()) {
+            throw new userAlreadyexists("User already exists");
+        }
         user.setScore(0);
         user.setBadges(new ArrayList<>());
         return repository.save(user);
