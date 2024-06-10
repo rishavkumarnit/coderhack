@@ -1,13 +1,17 @@
 package com.rishav.coderhack;
 
-import com.rishav.coderhack.service.*;
-import com.rishav.coderhack.entity.*;
-import com.rishav.coderhack.repository.*;
-import com.rishav.coderhack.exception.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.jupiter.api.Assertions.*;
+
+import com.rishav.coderhack.entity.User;
+import com.rishav.coderhack.exception.userException;
+import com.rishav.coderhack.repository.Userrepo;
+import com.rishav.coderhack.service.Userservice;
 
 
 @SpringBootTest
@@ -21,6 +25,7 @@ class serviceTests {
 
     @Test
     void testAddUser() {
+        service.deleteUser("1"); // First delete the user id if the documnet already contains the user id
         User user = new User("1", "testuser1");
         User savedUser = service.addUser(user);
         assertNotNull(savedUser);
@@ -30,6 +35,7 @@ class serviceTests {
 
     @Test
     void testUpdateUserScore() {
+        service.deleteUser("2"); // First delete the user id if the documnet already contains the user id
         User user = new User("2", "testuser2");
         service.addUser(user);
         User updatedUser = service.updateScore("2", 25);
@@ -39,6 +45,7 @@ class serviceTests {
 
     @Test
     void testGetUserById() {
+        service.deleteUser("3"); // First delete the user id if the documnet already contains the user id
         User user = new User("3", "testuser3");
         service.addUser(user);
         User foundUser = service.getUserById("3");
